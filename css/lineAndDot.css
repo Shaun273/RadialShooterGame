@@ -1,0 +1,28 @@
+.a, .dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  border-radius: 100%;
+  background-color: black;
+}
+
+.a {
+  margin-top: 500px;
+  margin-left: 500px;
+  z-index: 1;
+}
+
+.dot {
+  /* margin-top: 100px;
+  margin-left: 1000px; */
+  z-index: -2;
+}
+
+.line {
+  width: 100%;
+  color: black;
+  height: 1px;
+  background-color: black;
+  z-index: 0;
+  float:left;
+}
