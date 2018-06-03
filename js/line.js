@@ -76,7 +76,7 @@ function drawLongLine(a, pointerX, pointerY, line) {
   // Set Position
   $(line).css('position', 'absolute');
   if (pointerX < pointA.left) {
-    $(line).offset({ left: pointerX + pointAcenterX});
+    $(line).offset({ left: distance*Math.sin(angle)-pointA.left + pointAcenterX});
     //  top: pointA.top + pointAcenterY,
   } else {
     $(line).offset({ left: pointA.left + pointAcenterX});
