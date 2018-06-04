@@ -25,4 +25,12 @@
   background-color: black;
   z-index: 0;
   float:left;
+  /* animation: lineFire, 0.01s; */
 }
+
+/* @keyframes lineFire {
+  0%(width:0;)
+  50%(width: 100%)
+  100%(width:0;)
+
+} */

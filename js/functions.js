@@ -106,7 +106,7 @@ function hittest(line, enemy){
      // createLine(500, 500, event.pageX , event.pageY )
 
      // setInterval(function() {
-    drawLine('.a', event.pageX,event.pageY, '.line');
+    drawLongLine('.a', event.pageX,event.pageY, '.line');
      // });
      // $('.b').each(function(){
      //   if (hittest('.line','.b')){

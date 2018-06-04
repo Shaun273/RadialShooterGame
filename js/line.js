@@ -76,18 +76,21 @@ function drawLongLine(a, pointerX, pointerY, line) {
   // Set Position
   $(line).css('position', 'absolute');
   if (pointerX < pointA.left) {
-    $(line).offset({ left: distance*Math.sin(angle)-pointA.left + pointAcenterX});
+    $(line).offset({ left: pointA.left + pointAcenterX - distance*Math.cos((angle+180)*Math.PI/180)});
     //  top: pointA.top + pointAcenterY,
   } else {
     $(line).offset({ left: pointA.left + pointAcenterX});
     // top: pointA.top + pointAcenterY
   }
   if (pointerY < pointA.top) {
-    $(line).offset({top: pointerY +pointAcenterY});
+    console.log(pointA.top +pointAcenterY - distance*Math.sin((-angle)*Math.PI/180));
+    $(line).offset({top: pointA.top + pointAcenterY - distance*Math.sin((-angle)*Math.PI/180)});
   } else {
     $(line).offset({top: pointA.top + pointAcenterY});
   }
-
-
+  // setInterval($(line).css('width', distance + 'px');)
+  // function lineFire() {
+  //
+  // }
 
 }
