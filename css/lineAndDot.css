@@ -16,21 +16,29 @@
   /* margin-top: 100px;
   margin-left: 1000px; */
   z-index: -2;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+.b {
+  margin-top: 100px;
+  margin-left: 1000px;
+  z-index: -2;
 }
 
 .line {
-  width: 100%;
+  width: 1000px;
   color: black;
   height: 1px;
   background-color: black;
   z-index: 0;
   float:left;
-  /* animation: lineFire, 0.01s; */
+  animation: lineFire, 0.01s;
 }
 
-/* @keyframes lineFire {
-  0%(width:0;)
-  50%(width: 100%)
-  100%(width:0;)
+@keyframes lineFire {
+  0%{width:0;}
+  50%{width: 100%;}
+  100%{width:0;}
 
-} */
+}

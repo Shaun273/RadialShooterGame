@@ -36,83 +36,143 @@ function createLine(x1, y1, x2, y2) {
 
 // hit test function
 
-function hittest(line, enemy){
-  var a = $(line).offset()
-  console.log(a);
-	var aX1 = parseInt(a.style.left);
-	var aY1 = parseInt(a.style.top);
-	var aX2 = aX1 + parseInt(a.style.width)-1;
-	var aY2 = aY1;
-	var aX3 = aX1;
-	var aY3 = aY1 + parseInt(a.style.height)-1;
-	var aX4 = aX2;
-	var aY4 = aY3;
+// function hittest(line, enemy){
+//
+//   // console.log(a); // rectangular overlap detection.
+// 	var aX1 = parseInt(line.offset().left);
+// 	var aY1 = parseInt(line.offset().top);
+// 	var aX2 = aX1 + parseInt(line.width());
+// 	var aY2 = aY1;
+// 	var aX3 = aX1;
+// 	var aY3 = aY1 + parseInt(line.height());
+// 	var aX4 = aX2;
+// 	var aY4 = aY3;
+//
+//
+// 	var bX1 = parseInt(enemy.offset().left);
+// 	var bY1 = parseInt(enemy.offset().top);
+// 	var bX2 = bX1 + parseInt(enemy.width())-1;
+// 	var bY2 = bY1;
+// 	var bX3 = bX1;
+// 	var bY3 = bY1 + parseInt(enemy.height())-1;
+// 	var bX4 = bX2;
+// 	var bY4 = bY3;
+//
+// 	var hOverlap = true;
+// 	if(aX1<bX1 && aX2<bX1) hOverlap = false;
+// 	if(aX1>bX2 && aX2>bX2) hOverlap = false;
+//
+// 	var vOverlap = true;
+// 	if(aY1<bY1 && aY3<bY1) vOverlap = false;
+// 	if(aY1>bY3 && aY3>bY3) vOverlap = false;
+//
+// 	if(hOverlap && vOverlap) return true;
+// 	else return false;
+//
+//
+// }
 
 
-	var bX1 = parseInt(b.style.left);
-	var bY1 = parseInt(b.style.top);
-	var bX2 = bX1 + parseInt(b.style.width)-1;
-	var bY2 = bY1;
-	var bX3 = bX1;
-	var bY3 = bY1 + parseInt(b.style.height)-1;
-	var bX4 = bX2;
-	var bY4 = bY3;
+function hittest(line,enemy){
+  if (angle >0) {
+    var lineY1 = parseInt(line.offset().top);
 
-	var hOverlap = true;
-	if(aX1<bX1 && aX2<bX1) hOverlap = false;
-	if(aX1>bX2 && aX2>bX2) hOverlap = false;
+    var lineY2 = lineY1 + lineLength * Math.sin((angle)*Math.PI/180);
+  } else {
+    var lineY1 = parseInt(line.offset().top);
 
-	var vOverlap = true;
-	if(aY1<bY1 && aY3<bY1) vOverlap = false;
-	if(aY1>bY3 && aY3>bY3) vOverlap = false;
+    var lineY2 = lineY1 - lineLength * Math.sin((-angle)*Math.PI/180);
+  }
+  if (Math.abs(angle) < 90) {
 
-	if(hOverlap && vOverlap) return true;
-	else return false;
+    var lineX1 = parseInt(line.offset().left);
+    var lineX2 = lineX1 + lineLength*Math.sin((-angle)*Math.PI/180)
+
+  } else {
+    var lineX1 = parseInt(line.offset().left);
+    var lineX2 = lineX1 - lineLength*Math.sin((-angle)*Math.PI/180)
+  }
+   enX1 = enemy.offset().left;
+   enY1 = enemy.offset().top;
+   enRadius = 50;
+   var c = 505;
+   return line_circle_collision(lineX1,lineY1,lineX2,lineY2,c,enX1,enY1,enRadius)
 }
 
+function line_circle_collision(x1,y1,x2,y2,c,cirX,cirY,radius) {
+  var dydx = -y2/x2 -c/x2;
+  for (var x = x1; x < x2 ; x++) {
+    var y =dydx*x +c;
+    if (y > cirY-enRadius && y < cirY+enRadius & x > cirX - enRadius && x < cirX + enRadius){
+    return true;
+    }
+  }
+}
+
+function scr_line_collision(x1,y1,x2,y2,x3,y3,x4,y4) {
+
+  var denominator= ((x2 - x1) * (y4 - y3)) - ((y2 - y1) * (x4 - x3));
+  var numerator1 = ((y1 - y3) * (x4 - x3)) - ((x1 - x3) * (y4 - y3));
+  var numerator2 = ((y1 - y3) * (x2 - x1)) - ((x1 - x3) * (y2 - y1));
+
+  // Detect coincident lines
+  if (denominator == 0) {return (numerator1 == 0 && numerator2 == 0)}
+
+  var r = numerator1 / denominator;
+  var s = numerator2 / denominator;
+
+  return ((r >= 0 && r <= 1) && (s >= 0 && s <= 1));
+}
+// var pageX;
+// var pageY;
 
 // MouseTracker
-  (function() {
+(function handlePointer() {
 
-   document.onmousemove = handleMouseMove;
-   function handleMouseMove(event) {
-     var dot, eventDoc, doc, body, pageX, pageY;
+  document.onmousemove = handleMouseMove;
+  function handleMouseMove(event) {
+    var dot, eventDoc, doc, body;
+    event = event || window.event; // IE-ism
+    pageX = event.pageX;
+    pageY = event.pageY;
 
-     event = event || window.event; // IE-ism
+    // If pageX/Y aren't available and clientX/Y
+    // are, calculate pageX/Y
+    // Calculate pageX/Y if missing and clientX/Y available
+    // if (event.pageX == null && event.clientX != null) {
+    //   eventDoc = (event.target && event.target.ownerDocument) || document;
+    //   doc = eventDoc.documentElement;
+    //   body = eventDoc.body;
+    //
+    //   event.pageX = event.clientX +
+    //     (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+    //     (doc && doc.clientLeft || body && body.clientLeft || 0);
+    //   event.pageY = event.clientY +
+    //     (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+    //     (doc && doc.clientTop  || body && body.clientTop  || 0 );
+    // }
 
-     // If pageX/Y aren't available and clientX/Y
-     // are, calculate pageX/Y - logic taken from jQuery
-     // Calculate pageX/Y if missing and clientX/Y available
-     if (event.pageX == null && event.clientX != null) {
-       eventDoc = (event.target && event.target.ownerDocument) || document;
-       doc = eventDoc.documentElement;
-       body = eventDoc.body;
+    // Add a dot to follow the cursor
+    // dot = document.createElement('div');
+    // dot.className = "dot";
+    // dot.style.left = event.pageX + "px";
+    // dot.style.top = event.pageY + "px";
+    // document.body.appendChild(dot);
+    // console.log(event.pageX);
 
-       event.pageX = event.clientX +
-         (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-         (doc && doc.clientLeft || body && body.clientLeft || 0);
-       event.pageY = event.clientY +
-         (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-         (doc && doc.clientTop  || body && body.clientTop  || 0 );
-     }
-
-     // Add a dot to follow the cursor
-     // dot = document.createElement('div');
-     // dot.className = "dot";
-     // dot.style.left = event.pageX + "px";
-     // dot.style.top = event.pageY + "px";
-     // document.body.appendChild(dot);
-     // console.log(event.pageX);
-     // createLine(500, 500, event.pageX , event.pageY )
-
-     // setInterval(function() {
+    // setInterval(function() {
+    // var line = $('.line');
     drawLongLine('.a', event.pageX,event.pageY, '.line');
-     // });
-     // $('.b').each(function(){
-     //   if (hittest('.line','.b')){
-     //     console.log("collided");
-     //   }
-     // })
+    // $('.dot').each(function(){
+    //   // console.log($('.dot'));
+    //   if (hittest(line,$(this))) {
+    //     console.log("collided");
+    //   } else {
+    //     console.log("not collided");
+    //   }
+    // })
+    // });
+    //
 
-   }
+  }
 })();
