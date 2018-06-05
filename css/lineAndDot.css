@@ -7,9 +7,12 @@
 }
 
 .a {
-  margin-top: 500px;
-  margin-left: 500px;
+  /* justify-content: center; */
   z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
 }
 
 .dot {
@@ -17,15 +20,23 @@
   margin-left: 1000px; */
   z-index: -2;
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 30px;
+  height: 30px;
 }
 .b {
   margin-top: 100px;
   margin-left: 1000px;
   z-index: -2;
 }
+.marker {
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  border-radius: 100%;
+  background-color: red;
+  position: absolute;
 
+}
 .line {
   width: 1000px;
   color: black;
@@ -33,12 +44,12 @@
   background-color: black;
   z-index: 0;
   float:left;
-  animation: lineFire, 0.01s;
+  /* animation: lineFire, 0.01s; */
 }
 
-@keyframes lineFire {
+/* @keyframes lineFire {
   0%{width:0;}
   50%{width: 100%;}
   100%{width:0;}
 
-}
+} */
