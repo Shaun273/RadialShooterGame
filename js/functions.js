@@ -31,56 +31,59 @@
 //
 //     return createLineElement(x, y, c, alpha);
 // }
-var enRadius =  $('.dot').width / 2;
+var enRadius = 30 / 2;
+var hit = false;
 function hittest(line,enemy){
   // console.log("hittest ran");
   // console.log(line.offset());
   // console.log(angle);
-  if (angle >= 0) {
-    if (Math.abs(angle) <= 90) {
-      var lineY1 = parseInt(line.offset().top);
-      var lineY2 = lineY1 + lineLength * Math.sin((angle)*Math.PI/180);
+  if (hit == false) {
+    if (angle >= 0) {
+      if (Math.abs(angle) <= 90) {
+        var lineY1 = parseInt(line.offset().top);
+        var lineY2 = lineY1 + lineLength * Math.sin((angle)*Math.PI/180);
 
-      var lineX1 = parseInt(line.offset().left);
-      var lineX2 = lineX1 + lineLength * Math.cos((angle)*Math.PI/180);
-      // console.log(lineY2);
+        var lineX1 = parseInt(line.offset().left);
+        var lineX2 = lineX1 + lineLength * Math.cos((angle)*Math.PI/180);
+        // console.log(lineY2);
 
-    } else {
-      var lineY1 = parseInt(line.offset().top);
-      var lineY2 = lineY1 + lineLength * Math.sin((180-angle)*Math.PI/180);
+      } else {
+        var lineY1 = parseInt(line.offset().top);
+        var lineY2 = lineY1 + lineLength * Math.sin((180-angle)*Math.PI/180);
 
-      var lineX2 = parseInt(line.offset().left);
-      var lineX1 = lineX2 + lineLength * Math.cos((180-angle)*Math.PI/180);
-      // console.log(lineY2);
+        var lineX2 = parseInt(line.offset().left);
+        var lineX1 = lineX2 + lineLength * Math.cos((180-angle)*Math.PI/180);
+        // console.log(lineY2);
+      }
+
+    } else if (angle < 0) {
+      if (Math.abs(angle) <= 90) {
+        var lineY2 = parseInt(line.offset().top);
+        var lineY1 = lineY2 + lineLength * Math.sin((-angle)*Math.PI/180);
+
+        var lineX1 = parseInt(line.offset().left);
+        var lineX2 = lineX1 + lineLength * Math.cos((-angle)*Math.PI/180);
+        // console.log(lineY1);
+
+      } else {
+        var lineY2 = parseInt(line.offset().top);
+        var lineY1 = lineY2 + lineLength * Math.sin((180 + angle) * Math.PI/180);
+
+        var lineX2 = parseInt(line.offset().left);
+        var lineX1 = lineX2 + lineLength * Math.cos((180 + angle) * Math.PI/180);
+        // console.log(lineY1);
+      }
     }
+    
+    // console.log(lineY2);
+    // console.log(lineX2);
+    var enX1 = enemy.offset().left;
+    var enY1 = enemy.offset().top;
 
-  } else if (angle < 0) {
-    if (Math.abs(angle) <= 90) {
-      var lineY2 = parseInt(line.offset().top);
-      var lineY1 = lineY2 + lineLength * Math.sin((-angle)*Math.PI/180);
-
-      var lineX1 = parseInt(line.offset().left);
-      var lineX2 = lineX1 + lineLength * Math.cos((-angle)*Math.PI/180);
-      // console.log(lineY1);
-
-    } else {
-      var lineY2 = parseInt(line.offset().top);
-      var lineY1 = lineY2 + lineLength * Math.sin((180 + angle) * Math.PI/180);
-
-      var lineX2 = parseInt(line.offset().left);
-      var lineX1 = lineX2 + lineLength * Math.cos((180 + angle) * Math.PI/180);
-      // console.log(lineY1);
-    }
-
+    // var c1 = lineX1;
+    // var c2 = lineY1;
+    return line_circle_collision(lineX1,lineY1,lineX2,lineY2,centerX,centerY,enX1,enY1,enRadius);
   }
-  // console.log(lineY2);
-  // console.log(lineX2);
-  var enX1 = enemy.offset().left;
-  var enY1 = enemy.offset().top;
-
-  // var c1 = lineX1;
-  // var c2 = lineY1;
-  return line_circle_collision(lineX1,lineY1,lineX2,lineY2,centerX,centerY,enX1,enY1,enRadius);
 }
 
 function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
@@ -90,7 +93,7 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
   // console.log(centerY);
   if (x2>x1) {
 
-    for (var x = x1; x < x2+1 ; x+=50) {
+    for (var x = x1; x < x2+1 ; x+=5) {
       var y =dydx*(x-c1)+c2;
       // dot = document.createElement('div');
       // dot.className = "marker";
@@ -99,11 +102,11 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
       // document.body.appendChild(dot);
       if (y > cirY && y < cirY+ 2 * radius && x > cirX && x < cirX + 2 * radius){
         return true
-        // break;
+        break;
       }
     }
   } else {
-    for (var x = x2; x < x1+1 ; x+=50) {
+    for (var x = x2; x < x1+1 ; x+=5) {
 
       var y =dydx*(x-c1)+c2;
       // dot = document.createElement('div');
@@ -113,7 +116,8 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
       // document.body.appendChild(dot);
       if (y > cirY && y < cirY+ 2 * radius && x > cirX && x < cirX + 2 * radius){
         return true
-        // break;
+        hit = true;
+        break;
       }
     }
   }

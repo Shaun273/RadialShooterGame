@@ -2,19 +2,22 @@ var firing = true;
 var centerX= 500;
 var centerY= 500;
 var youRadius;
+var hit = false;
 $(document).ready(function(){
 
 
   $('.line').css('width', 1000 + 'px');
   var pause = false;
   var numEnemies = 20;
-  enRadius = $('.dot').width / 2;
-  youRadius = $('.a').width / 2;
+  enRadius = 30 / 2;
+  var $a = $('.a');
+  youRadius = $a.width / 2;
   var newLevel = true;
   var pageX;
   var pageY;
   var score=0;
-  var increment = 2;
+  var increment = 3;
+
 
  //  centerX = parseInt($('.a').offset().left) - parseInt($('.a').width());
  //  centerY = parseInt($('.a').offset().top) - parseInt($('.a').height());
@@ -29,6 +32,7 @@ $(document).ready(function(){
 
 
   function game() {
+
     // console.log("iterated");
     if (pause==true) {
 
@@ -48,6 +52,9 @@ $(document).ready(function(){
         }
         newLevel = false;
       }
+      $a = $('.a');
+      centerX = $a.offset().left+$a.width() / 2;
+      centerY = $a.offset().top+$a.height() / 2;
 
       // get mouse Position
 
@@ -58,30 +65,50 @@ $(document).ready(function(){
 
       // animate line?
       firing = !firing;
-      $(".line").animate({
+      $line = $(".line");
+      // function scaleUp($line)
+      // {
+      //     $line.animate({width: 0}, function ()
+      //     {
+      //         scaleDown($line);
+      //     });
+      // }
+      //
+      // function scaleDown($line)
+      // {
+      //     $line.animate({width: lineLength},0.1, function ()
+      //     {
+      //         scaleUp($line);
+      //     });
+      // }
+      // scaleDown($line);
+
+      $line.animate({
         width: 'toggle'
       },0.1);
 
       // test collision
       if (firing == true) {
+        hit = false;
         var line = $('.line');
         $('.dot').each(function(){
           // console.log($('.dot'));
+          if (hit == false){
+            if (hittest(line,$(this))) {
+              console.log("collided");
 
-          if (hittest(line,$(this))) {
-            console.log("collided");
-
-            score++;
-            // $(this).css("background-color", "yellow");
-            if (Math.random()<0.5) {
-              this.style.left = Math.round(Math.random())*1000 + "px";
-              this.style.top = Math.round(Math.random()*700) + "px";
+              score++;
+              // $(this).css("background-color", "yellow");
+              if (Math.random()<0.5) {
+                this.style.left = Math.round(Math.random())*1000 + "px";
+                this.style.top = Math.round(Math.random()*700) + "px";
+              } else {
+                this.style.left = Math.round(Math.random()*1000) + "px";
+                this.style.top = Math.round(Math.random())*700 + "px";
+              }
             } else {
-              this.style.left = Math.round(Math.random()*1000) + "px";
-              this.style.top = Math.round(Math.random())*700 + "px";
+              // console.log("not collided");
             }
-          } else {
-            // console.log("not collided");
           }
         })
       };
@@ -101,7 +128,9 @@ $(document).ready(function(){
       });
       // test lose
       if (loseTest()!=false){
+        $('#score').html("Score: "+score);
         setTimeout(function(){game()},50)
+
       } else {
         alert("You lose, your score was: "+toString(score))
       }

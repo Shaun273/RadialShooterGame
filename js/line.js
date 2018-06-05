@@ -55,6 +55,7 @@ centerY = pointA.top + $('.a').height() / 2;
 
 function drawLongLine(a, pointerX, pointerY, line) {
   if (firing == true){
+  var pointA = $('.a').offset();
 
   var pointBcenterX = pointerX+"px";
   var pointBcenterY = pointerY+"px";
