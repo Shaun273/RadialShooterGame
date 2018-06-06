@@ -1,8 +1,7 @@
-var enRadius = 30 / 2;
+var enRadius = 40 / 2;
 var hit = false;
 
 // Collisions
-
 function hittest(line,enemy){
   // console.log("hittest ran");
   // console.log(line.offset());
@@ -63,13 +62,9 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
   // console.log(centerY);
   if (x2>x1) {
 
-    for (var x = x1; x < x2+1 ; x+=5) {
+    for (var x = x1; x < x2+1 ; x+=colisionTestInterval) {
       var y =dydx*(x-c1)+c2;
-      // dot = document.createElement('div');
-      // dot.className = "marker";
-      // dot.style.left = x + "px";
-      // dot.style.top = y + "px";
-      // document.body.appendChild(dot);
+      // createMarker(x,y);
       if (y > cirY && y < cirY+ 2 * radius && x > cirX && x < cirX + 2 * radius){
         hit = true;
         return true
@@ -77,14 +72,10 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
       }
     }
   } else {
-    for (var x = x2; x < x1+1 ; x+=5) {
+    for (var x = x1; x > x2+1 ; x-=colisionTestInterval) {
 
       var y =dydx*(x-c1)+c2;
-      // dot = document.createElement('div');
-      // dot.className = "marker";
-      // dot.style.left = x + "px";
-      // dot.style.top = y + "px";
-      // document.body.appendChild(dot);
+      // createMarker(x,y);
       if (y > cirY && y < cirY+ 2 * radius && x > cirX && x < cirX + 2 * radius){
         hit = true;
         return true
@@ -94,23 +85,44 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
   }
 }
 
-// Lose test
+// collision resolving
+function resolveHit(object) {
 
+  if (endless == true){
+
+    if (Math.random()<0.5) {
+      object.style.left = Math.round(Math.random())*1000 + "px";
+      object.style.top = Math.round(Math.random()*700) + "px";
+    } else {
+      object.style.left = Math.round(Math.random()*1000) + "px";
+      object.style.top = Math.round(Math.random())*700 + "px";
+    }
+  } else {
+    object.remove();
+  }
+}
+
+
+// Create test marker
+function createMarker(x,y) {
+  dot = document.createElement('div');
+  dot.className = "marker";
+  dot.style.left = x + "px";
+  dot.style.top = y + "px";
+  document.body.appendChild(dot);
+}
+
+// Lose test function
 function loseTest() {
-  var leftYouX = centerX;
+  var leftYouX = centerX-youRadius;
   var rightYouX = leftYouX + youRadius*2;
-  var topYouY = centerY;
+  var topYouY = centerY-youRadius;
   var bottomYouY = topYouY + youRadius*2;
   $('.dot').each(function() {
     var leftEnX = parseInt(this.style.left);
     var rightEnX = leftEnX + enRadius*2;
     var topEnY = parseInt(this.style.top);
     var bottomEnY = topEnY +enRadius*2;
-    // console.log("left"+leftEnX);
-    // console.log("left"+rightEnX);
-    // console.log("top"+topEnY);
-    // console.log("Bottom"+bottomEnY);
-    console.log(leftEnX <= rightYouX && rightEnX >= leftYouX && topEnY <= bottomYouY &&  bottomEnY >= topYouY);
     if (leftEnX <= rightYouX && rightEnX >= leftYouX &&  topEnY <= bottomYouY &&  bottomEnY >= topYouY){
       lost = true;
       return true;
@@ -118,22 +130,40 @@ function loseTest() {
   })
 }
 
-// Move enemies functions
+//  Creat enemies function()
+function createEnemies(){
 
+  if (newLevel == true) {
+
+    for (var i = 0; i < numEnemies-1; i++) {
+
+      dot = document.createElement('div');
+      dot.className = "dot";
+      dot.style.left = Math.round(Math.random())*1000 + "px";
+      dot.style.top = Math.round(Math.random()*700) + "px";
+      document.body.appendChild(dot);
+      // console.log("Created dot");
+    }
+    newLevel = false;
+  }
+}
+
+// Move enemies functions
 function moveEnemies(){
 
   $('.dot').each(function(){
-    if (parseInt(this.style.left)<centerX) {
+    if (parseInt(this.style.left)<centerX- enRadius) {
       this.style.left = parseInt(this.style.left)+increment+"px";
     } else {
       this.style.left = parseInt(this.style.left)-increment+"px";
     }
-    if (parseInt(this.style.top)<centerY) {
+    if (parseInt(this.style.top)<centerY-enRadius) {
       this.style.top = parseInt(this.style.top)+increment+"px";
     } else {
       this.style.top = parseInt(this.style.top)-increment+"px";
     }
-
+    var enAngle = Math.atan2(parseInt(this.style.top) - centerY, parseInt(this.style.left) - centerX) * 180 / Math.PI;
+    $(this).css('transform', 'rotate(' + angle + 'deg)');
   });
 }
 

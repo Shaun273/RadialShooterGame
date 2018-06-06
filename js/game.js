@@ -1,4 +1,4 @@
-var firing = true;
+var firing = false;
 var centerX= 500;
 var centerY= 500;
 var youRadius;
@@ -10,16 +10,18 @@ var numEnemies = 20;
 var pageX;
 var pageY;
 var score=0;
-var increment = 3;
+var increment = 1;
+var colisionTestInterval = 1;
 var newLevel = true;
+var endless = true;
 var $a;
 $('.line').css('width', lineLength + 'px');
-enRadius = 30 / 2;
+
 
 $(document).ready(function(){
   rules.style.display = "block";
   pause = true;
-  firing != firing;
+
 
 
 
@@ -51,19 +53,7 @@ function game() {
     setTimeout(function(){game()},50)
   } else {
     // create enemies
-    if (newLevel == true) {
-
-      for (var i = 0; i < numEnemies-1; i++) {
-
-        dot = document.createElement('div');
-        dot.className = "dot";
-        dot.style.left = Math.round(Math.random())*1000 + "px";
-        dot.style.top = Math.round(Math.random()*700) + "px";
-        document.body.children[0].appendChild(dot);
-        // console.log("Created dot");
-      }
-      newLevel = false;
-    }
+    createEnemies()
     $a = $('.a');
     centerX = $a.offset().left + $a.width() / 2;
     centerY = $a.offset().top + $a.height() / 2;
@@ -79,7 +69,7 @@ function game() {
 
     // animate line?
     firing = !firing;
-    animateLine()
+    animateLine() //
 
     // test collision
     if (firing == true) {
@@ -89,39 +79,34 @@ function game() {
         // console.log($('.dot'));
         if (hit == false && projectileType == 1){
           if (hittest(line,$(this))) {
-            console.log("collided");
+            // console.log("hit");
 
             score++;
             // $(this).css("background-color", "yellow");
-            if (Math.random()<0.5) {
-              this.style.left = Math.round(Math.random())*1000 + "px";
-              this.style.top = Math.round(Math.random()*700) + "px";
-            } else {
-              this.style.left = Math.round(Math.random()*1000) + "px";
-              this.style.top = Math.round(Math.random())*700 + "px";
-            }
+            resolveHit(this);
+
           } else {
-            // console.log("not collided");
+            // console.log("not hit");
           }
         }
-      })
-    };
+      });
+    }
 
     // Move enemies
-    moveEnemies()
+    moveEnemies();
 
     // test lose
-    loseTest()
+    loseTest();
     if (lost == true){
       console.log("Lose");
-      $("#score").html("You lose, your score was: "+score)
+      $("#score").html("You lose, your score was: "+score) // display score
       loseScreen.style.display = "block";
     } else {
-      $('#score').html("Score: "+score);
+      $('#scoreButton').html("Score: "+score); // display score
       setTimeout(function(){game()},50)
     }
 
-    // display score
+
 
     // reset?
 

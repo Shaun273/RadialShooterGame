@@ -42,7 +42,7 @@
   color: black;
   height: 1px;
   background-color: black;
-  z-index: 0;
+  z-index: -1;
   float:left;
   /* animation: lineFire, 0.01s; */
 }

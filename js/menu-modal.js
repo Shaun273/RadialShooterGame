@@ -6,7 +6,9 @@ var menu = document.getElementById('menu');
 var menuBtn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var spanMenu = document.getElementsByClassName("close")[1];
+var spanLose = document.getElementsByClassName("close")[2];
+var spanRules = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
 menuBtn.onclick = function() {
@@ -15,21 +17,30 @@ menuBtn.onclick = function() {
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+spanMenu.onclick = function() {
     menu.style.display = "none";
-    loseScreen.style.display = "none";
+    // loseScreen.style.display = "none";
     rules.style.display = "none";
     pause =false;
-    firing != firing;
+}
+spanLose.onclick = function() {
+    menu.style.display = "none";
+    // loseScreen.style.display = "none";
+    rules.style.display = "none";
+    pause =false;
+}
+spanRules.onclick = function() {
+
+    rules.style.display = "none";
+    pause =false;
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target == menu) {
         menu.style.display = "none";
         rules.style.display = "none";
         pause = false;
-        firing != firing;
     }
 }
 // Lose screen modal
@@ -37,7 +48,11 @@ var loseScreen = document.getElementById("loseScreen");
 var tryAgainBtn = document.getElementById("again")
 
 tryAgainBtn.onclick = function(){
-  firing = false;
+  if (!firing){
+    animateLine();
+  }
+  firing = true;
+
   numEnemies = 20;
   newLevel = true;
   score=0;
@@ -47,6 +62,10 @@ tryAgainBtn.onclick = function(){
   lost = false;
   projectileType = 1;
   loseScreen.style.display = "none";
+  $('.dot').each(function(){
+    this.remove()
+  })
+
   game()
 
 }
@@ -66,3 +85,13 @@ window.onclick = function(event) {
 var rulesBtn = document.getElementById("rulesBtn");
 
 var rulesModal = document.getElementById("rules");
+
+var playBtn = document.getElementById("play")
+
+playBtn.onclick = function(){
+  rules.style.display = "none";
+  pause = false;
+  firing = true;
+  playBtn.style.display = "none";
+  game()
+}

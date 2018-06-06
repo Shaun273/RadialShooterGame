@@ -4,10 +4,24 @@
 body  {
   width: 100vw;
   height: 100vh;
+  position: fixed;
   font-family:  Helvetica, Arial, sans-serif;
+  z-index: -1;
 }
 .body-div {
-  width: 80%;
-  height: 80%;
-  border: 5px,black,solid;
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  outline: 200px solid red;
+  border: 5px black  solid ;
+  margin:5%;
+  z-index: 0;
+  /* outline:  */
 }
+
+/* Theme */
+.dead {
+  background: url()    ;
+}
+
+.zombie's
