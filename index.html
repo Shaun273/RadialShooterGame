@@ -5,26 +5,91 @@
     <title>Radial Shooter</title>
     <link rel="stylesheet" href="css/lineAndDot.css">
     <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/menu-modal.css">
+    <link rel="stylesheet" href="css/nav-bar.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/game.js" charset="utf-8"></script>
+
 
   </head>
   <body>
 
 
+    <div id="rules" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Rules</h2>
+        </div>
+        <div class="modal-body">
+          <p>Here are the rules of the game!</p>
+          <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+
+          <button id="play" class="button" type="button" name="button">Play!</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="menu" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Modal Header</h2>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the Modal Body</p>
+          <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+          <h3>Modal Footer</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="loseScreen" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>You lost :(</h2>
+        </div>
+        <div class="modal-body">
+          <p id="score">Your score was: </p>
+          <button id="again" class="button" type="button" name="button">Try Again?</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-div">
+      <div class="nav">
+        <button class="navItem" id="myBtn" type="button" name="button">Menu</button>
+        <button class="navItem" id="pause" type="button" name="button">Pause</button>
+        <button class="navItem" id="rulesBtn" type="button" name="button">Rules</button>
+        <span class="navItem" id="scoreButton">Score:</span>
+      </div>
+
+
 
     <!-- Test line and dot -->
-    <div class="a"></div>
-    <div class="b"></div>
-    <div class="line"></div>
-    <div class="info">
-      <div class="point-a"></div>
-      <div class="point-b"></div>
-      <div class="angle"></div>
-      <div class="distance"></div>
+      <div class="a"></div>
+      <!-- <div class="dot"></div> -->
+      <div class="line"></div>
+      <div class="info">
+        <div class="point-a"></div>
+        <div class="point-b"></div>
+        <div class="angle"></div>
+        <div class="distance"></div>
+      </div>
+      <script src="js/nav-bar.js" charset="utf-8"></script>
+      <script src="js/line.js" charset="utf-8"></script>
+      <script src="js/functions.js" charset="utf-8"></script>
+      <script src="js/game.js" charset="utf-8"></script>
+      <script src="js/menu-modal.js" charset="utf-8"></script>
     </div>
-    <script src="js/line.js" charset="utf-8"></script>
-    <script src="js/functions.js" charset="utf-8"></script>
-
   </body>
 </html>
