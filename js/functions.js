@@ -1,38 +1,8 @@
-
-// create a line at angle
-// function createLineElement(x, y, length, angle) {
-//     var line = document.createElement("div");
-//     var styles = 'border: 1px solid black; '
-//                + 'width: ' + length + 'px; '
-//                + 'height: 0px; '
-//                + '-moz-transform: rotate(' + angle + 'rad); '
-//                + '-webkit-transform: rotate(' + angle + 'rad); '
-//                + '-o-transform: rotate(' + angle + 'rad); '
-//                + '-ms-transform: rotate(' + angle + 'rad); '
-//                + 'position: absolute; '
-//                + 'top: ' + y + 'px; '
-//                + 'left: ' + x + 'px; ';
-//     line.setAttribute('style', styles);
-//     return line;
-// }
-//
-// function createLine(x1, y1, x2, y2) {
-//     var a = x1 - x2,
-//         b = y1 - y2,
-//         c = Math.sqrt(a * a + b * b);
-//
-//     var sx = (x1 + x2) / 2,
-//         sy = (y1 + y2) / 2;
-//
-//     var x = sx - c / 2,
-//         y = sy;
-//
-//     var alpha = Math.PI - Math.atan2(-b, a);
-//
-//     return createLineElement(x, y, c, alpha);
-// }
 var enRadius = 30 / 2;
 var hit = false;
+
+// Collisions
+
 function hittest(line,enemy){
   // console.log("hittest ran");
   // console.log(line.offset());
@@ -74,7 +44,7 @@ function hittest(line,enemy){
         // console.log(lineY1);
       }
     }
-    
+
     // console.log(lineY2);
     // console.log(lineX2);
     var enX1 = enemy.offset().left;
@@ -101,6 +71,7 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
       // dot.style.top = y + "px";
       // document.body.appendChild(dot);
       if (y > cirY && y < cirY+ 2 * radius && x > cirX && x < cirX + 2 * radius){
+        hit = true;
         return true
         break;
       }
@@ -115,16 +86,69 @@ function line_circle_collision(x1,y1,x2,y2,c1,c2,cirX,cirY,radius) {
       // dot.style.top = y + "px";
       // document.body.appendChild(dot);
       if (y > cirY && y < cirY+ 2 * radius && x > cirX && x < cirX + 2 * radius){
-        return true
         hit = true;
+        return true
         break;
       }
     }
   }
 }
 
+// Lose test
+
+function loseTest() {
+  var leftYouX = centerX;
+  var rightYouX = leftYouX + youRadius*2;
+  var topYouY = centerY;
+  var bottomYouY = topYouY + youRadius*2;
+  $('.dot').each(function() {
+    var leftEnX = parseInt(this.style.left);
+    var rightEnX = leftEnX + enRadius*2;
+    var topEnY = parseInt(this.style.top);
+    var bottomEnY = topEnY +enRadius*2;
+    // console.log("left"+leftEnX);
+    // console.log("left"+rightEnX);
+    // console.log("top"+topEnY);
+    // console.log("Bottom"+bottomEnY);
+    console.log(leftEnX <= rightYouX && rightEnX >= leftYouX && topEnY <= bottomYouY &&  bottomEnY >= topYouY);
+    if (leftEnX <= rightYouX && rightEnX >= leftYouX &&  topEnY <= bottomYouY &&  bottomEnY >= topYouY){
+      lost = true;
+      return true;
+    }
+  })
+}
+
+// Move enemies functions
+
+function moveEnemies(){
+
+  $('.dot').each(function(){
+    if (parseInt(this.style.left)<centerX) {
+      this.style.left = parseInt(this.style.left)+increment+"px";
+    } else {
+      this.style.left = parseInt(this.style.left)-increment+"px";
+    }
+    if (parseInt(this.style.top)<centerY) {
+      this.style.top = parseInt(this.style.top)+increment+"px";
+    } else {
+      this.style.top = parseInt(this.style.top)-increment+"px";
+    }
+
+  });
+}
+
+// Animate line function
+function animateLine(){
+
+  $line = $(".line");
+
+  $line.animate({
+    width: 'toggle'
+  },0.1);
+}
+
 // MouseTracker
-(function handlePointer() {
+(function() {
 
   document.onmousemove = handleMouseMove;
   function handleMouseMove(event) {

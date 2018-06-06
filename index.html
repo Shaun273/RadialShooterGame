@@ -6,17 +6,38 @@
     <link rel="stylesheet" href="css/lineAndDot.css">
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/menu-modal.css">
+    <link rel="stylesheet" href="css/nav-bar.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/game.js" charset="utf-8"></script>
+
 
   </head>
   <body>
     <div class="nav">
-      <button class="navItem myBtn" type="button" name="button">Menu</button>
-      <button class="navItem pause" type="button" name="button">Pause</button>
+      <button class="navItem" id="myBtn" type="button" name="button">Menu</button>
+      <button class="navItem" id="pause" type="button" name="button">Pause</button>
+      <button class="navItem" id="rulesBtn" type="button" name="button">Rules</button>
       <span class="navItem" id="score">Score:</span>
     </div>
-    <div id="myModal" class="modal">
+
+    <div id="rules" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Rules</h2>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the Modal Body</p>
+          <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+          <h3>Modal Footer</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="menu" class="modal">
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
@@ -33,6 +54,21 @@
       </div>
 
     </div>
+
+    <div id="loseScreen" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>You lost :(</h2>
+        </div>
+        <div class="modal-body">
+          <p id="score">Your score was: </p>
+          <button id="again" type="button" name="button">Try Again?</button>
+        </div>
+      </div>
+    </div>
+
     <div class="body-div">
 
 
@@ -48,9 +84,11 @@
         <div class="angle"></div>
         <div class="distance"></div>
       </div>
-      <script src="js/menu-modal.js" charset="utf-8"></script>
+      <script src="js/nav-bar.js" charset="utf-8"></script>
       <script src="js/line.js" charset="utf-8"></script>
       <script src="js/functions.js" charset="utf-8"></script>
+      <script src="js/game.js" charset="utf-8"></script>
+      <script src="js/menu-modal.js" charset="utf-8"></script>
     </div>
   </body>
 </html>
