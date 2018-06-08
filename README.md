@@ -68,4 +68,11 @@ A big problem was that when rotating the line about the center, the offset of th
 
 Multiple if statement needed to be used to correctly position the line.
 
-Unfortun
+Unfortunantly the line still flickers sometimes and i was unable to fix it.
+
+###Future
+
+Improving the styling and graphics
+Controls to move the character
+Fixing the creation of dead enemies when hit
+
