@@ -26,7 +26,7 @@ In this mode the enemies will be spawn in waves. The number of enemies will incr
 There are also two different themes to pick from. The zombie theme and the Penguin theme. These can be selected from the options.
 
 ##How to play
-when you launch the page you will be presented with the rules and instructions. 
+When you launch the page you will be presented with the rules and instructions. 
 
 After clicking play you will be presented with the options menu where you will be able to pick your mode and number of enemies. 
 
