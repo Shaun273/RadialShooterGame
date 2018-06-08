@@ -33,3 +33,7 @@ body  {
 .active {
 
 }
+
+#mute {
+  display: none;
+}
