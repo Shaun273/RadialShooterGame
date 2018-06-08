@@ -42,7 +42,7 @@ Use your mouse to control the direction the you are firing.
 ###Approach
 The project started off with the structure of the page, drawing the line div, the dot and a few test dots.
 
-I moved on to the logic and here I encountered most of my problems.
+I moved on to the logic and here i encountered most of my problems.
 
 ###Problems:
 ####Collision detection:
