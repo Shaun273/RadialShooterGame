@@ -152,7 +152,7 @@ function createEnemies(){
       dot = document.createElement('div');
       dot.className = "dot";
       dot.style.left = Math.round(Math.random())*1000 + "px";
-      dot.style.top = Math.round(Math.random()*700) + "px";
+      dot.style.top = Math.round(Math.random()*1000) + "px";
       document.body.appendChild(dot);
       // console.log("Created dot");
     }

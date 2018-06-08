@@ -33,23 +33,14 @@ $(document).ready(function(){
 
 
 
-  $('.a').each(function(){
-
-    this.style.left = parseInt(this.style.left)-100+"px";
-    this.style.top = parseInt(this.style.top)-100+"px";
-  })
+  // $('.a').each(function(){
+  //
+  //   this.style.left = parseInt(this.style.left)-100+"px";
+  //   this.style.top = parseInt(this.style.top)-100+"px";
+  // })
 
   var $a = $('.a');
   youRadius = $a.width() / 2;
-
-
-
-
- //  centerX = parseInt($('.a').offset().left) - parseInt($('.a').width());
- //  centerY = parseInt($('.a').offset().top) - parseInt($('.a').height());
- // console.log(centerX);
- // console.log(centerY);
-
 
 
   game()
@@ -70,15 +61,6 @@ function game() {
 
     centerX = $a.offset().left + $a.width() / 2;
     centerY = $a.offset().top + $a.height() / 2;
-    // console.log(centerX);
-    // console.log(centerY);
-
-    // get mouse Position
-
-    // create line
-
-    // handlePointer()
-
 
     // animate line?
     firing = !firing;
@@ -101,7 +83,7 @@ function game() {
           } else {
             // console.log("not hit");
           }
-        } else {
+        } else if (projectileType == 2){
           if (hittest(line,$(this))) {
             // console.log("hit");
             enemyHitAudio();

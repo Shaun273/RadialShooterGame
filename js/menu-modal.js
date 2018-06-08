@@ -93,7 +93,7 @@ function tryAgain() {
   lost = false;
   loseScreen.style.display = "none";
   removeDots()
-
+  
   game()
 }
 
@@ -107,6 +107,7 @@ function highscore() {
   for (var i = 0; i < highscores.length; i++) {
     if (score>highscores[i]) {
       highscores[i] = score;
+
     }
   }
 }
