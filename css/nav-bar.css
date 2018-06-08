@@ -12,3 +12,25 @@
   cursor: pointer;
   margin: 5px;
 }
+
+.right-float {
+  float: right;
+}
+
+.mutebtn {
+  height : 30px;
+
+}
+
+.waveScore {
+  display: none;
+}
+
+.unmuted {
+  content: url(../images/icons/1024px-Speaker_Icon.svg.png)
+
+}
+
+.muted {
+  content:url(../images/icons/Media-Controls-Mute-icon.png);
+}

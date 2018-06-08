@@ -8,6 +8,8 @@
 
 .a {
   /* justify-content: center; */
+  width: 30px;
+  height: 30px;
   z-index: 1;
   position: absolute;
   left: 50%;
@@ -18,16 +20,12 @@
 .dot {
   /* margin-top: 100px;
   margin-left: 1000px; */
-  z-index: -2;
+  z-index: 1;
   position: absolute;
   width: 30px;
   height: 30px;
 }
-.b {
-  margin-top: 100px;
-  margin-left: 1000px;
-  z-index: -2;
-}
+
 .marker {
   width: 10px;
   height: 10px;

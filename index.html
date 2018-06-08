@@ -2,13 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Radial Shooter</title>
+    <title>Poinnt Defence</title>
     <link rel="stylesheet" href="css/lineAndDot.css">
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/menu-modal.css">
     <link rel="stylesheet" href="css/nav-bar.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="css/options-menu.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link class="theme" rel="stylesheet" href="css/zombie-theme.css">
 
   </head>
   <body>
@@ -26,11 +27,12 @@
           <p>Some other text...</p>
         </div>
         <div class="modal-footer">
+          <div>
+            <button id="play" class="button" type="button" name="button">Play!</button>
+          </div>
 
-          <button id="play" class="button" type="button" name="button">Play!</button>
         </div>
       </div>
-
     </div>
 
     <div id="menu" class="modal">
@@ -38,14 +40,34 @@
       <div class="modal-content">
         <div class="modal-header">
           <span class="close">&times;</span>
-          <h2>Modal Header</h2>
+          <h2>Options</h2>
         </div>
         <div class="modal-body">
-          <p>Some text in the Modal Body</p>
-          <p>Some other text...</p>
+
         </div>
         <div class="modal-footer">
-          <h3>Modal Footer</h3>
+          <button id="endless" class="button opitions active" type="button" name="button">Endless</button>
+          <button id="waves" class="button opitions" type="button" name="button">Waves</button>
+          <div class="slidecontainer">
+            <input type="range" min="10" max="200" value="20" class="slider" id="myRange">
+            <p>Number of enemies: <span id="demo"></span></p>
+          </div>
+          <div class="">
+
+            <h3>Firing Type</h3>
+            <button id="singleTarget" class="button opitions active" type="button" name="button">Machine Gun (hard)</button>
+            <button id="beam" class="button opitions" type="button" name="button">Beam (easy)</button>
+          </div>
+          <div class="dropdown">
+            <button class=" button dropbtn">Theme</button>
+            <div class="dropdown-content">
+              <a id="theme1">Survivor</a>
+              <a id="theme2">Penguin</a>
+            </div>
+          </div>
+          <div>
+            <button id="confirm" class="button" type="button" name="button">Confirm</button>
+          </div>
         </div>
       </div>
 
@@ -65,31 +87,68 @@
       </div>
     </div>
 
-    <div class="body-div">
-      <div class="nav">
-        <button class="navItem" id="myBtn" type="button" name="button">Menu</button>
-        <button class="navItem" id="pause" type="button" name="button">Pause</button>
-        <button class="navItem" id="rulesBtn" type="button" name="button">Rules</button>
-        <span class="navItem" id="scoreButton">Score:</span>
+    <div id="highScores" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Highscores</h2>
+        </div>
+        <div class="modal-body">
+          <ol>
+            <li><span class="scores" id="one"></span> </li>
+            <li><span class="scores" id="two"></span> </li>
+            <li><span class="scores" id="three"></span> </li>
+            <li><span class="scores" id="four"></span> </li>
+            <li><span class="scores" id="five"></span> </li>
+            <li><span class="scores" id="six"></span> </li>
+            <li><span class="scores" id="seven"></span> </li>
+            <li><span class="scores" id="eight"></span> </li>
+            <li><span class="scores" id="nine"></span> </li>
+            <li><span class="scores" id="ten"></span> </li>
+          </ol>
+        </div>
+        <div class="modal-footer">
+
+
+        </div>
       </div>
-
-
-
-    <!-- Test line and dot -->
-      <div class="a"></div>
-      <!-- <div class="dot"></div> -->
-      <div class="line"></div>
-      <div class="info">
-        <div class="point-a"></div>
-        <div class="point-b"></div>
-        <div class="angle"></div>
-        <div class="distance"></div>
-      </div>
-      <script src="js/nav-bar.js" charset="utf-8"></script>
-      <script src="js/line.js" charset="utf-8"></script>
-      <script src="js/functions.js" charset="utf-8"></script>
-      <script src="js/game.js" charset="utf-8"></script>
-      <script src="js/menu-modal.js" charset="utf-8"></script>
     </div>
+
+    <!-- <div class="outline"> -->
+      <div class="body-div">
+
+        <div class="nav">
+          <button class="navItem" id="myBtn" type="button" name="button">Menu</button>
+          <button class="navItem" id="pause" type="button" name="button">Pause</button>
+          <button class="navItem" id="rulesBtn" type="button" name="button">Rules</button>
+          <button class="navItem" id="highScoresBtn" type="button" name="button">Highscores</button>
+          <span class="navItem" id="scoreButton">Score:</span>
+          <span class="navItem waveScore" id="waveScore">Wave:</span>
+          <button id="sound" class="navItem right-float" type="button" name="button"><img id="mute" class="mutebtn unmuted" src="images/icons/Media-Controls-Mute-icon.png" alt="Mute button"></button>
+        </div>
+
+
+        <audio id="backgroundMusic"   src="audio/Contamination.mp3" type="audio/mpeg" ></audio>
+        <audio id="gun"   src="audio/softGun.wav" type="audio/mpeg" ></audio>
+        <audio id="death"   src="audio/zombieDeath.wav" ></audio>
+        <audio id="beamShot"   src="audio/zombieDeath.wav" type="audio/mpeg" ></audio>
+        <audio id="penguinBye"   src="audio/penguinBye.wav" type="audio/mpeg" ></audio>
+        <audio id="noot"   src="audio/noot-noot.mp3" type="audio/mpeg" ></audio>
+
+      <!-- Test line and dot -->
+        <div class="a"></div>
+        <!-- <div class="dot"></div> -->
+        <div class="line"></div>
+
+        <script src="js/nav-bar.js" charset="utf-8"></script>
+        <script src="js/line.js" charset="utf-8"></script>
+        <script src="js/functions.js" charset="utf-8"></script>
+        <script src="js/options-menu.js" charset="utf-8"></script>
+        <script src="js/game.js" charset="utf-8"></script>
+        <script src="js/menu-modal.js" charset="utf-8"></script>
+      </div>
+
+    <!-- </div> -->
   </body>
 </html>
