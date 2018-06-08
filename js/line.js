@@ -18,11 +18,6 @@ function drawLongLine(a, pointerX, pointerY, line) {
     angle = Math.atan2(pointerY - centerY, pointerX - centerX) * 180 / Math.PI;
 
 
-    // INFO
-    // $('.info .point-a').text('Point-A: Left: ' + pointA.left + ' Top: ' + pointA.top);
-    // $('.info .point-b').text('Point-B: Left: ' + pointerX + ' Top: ' + pointerY);
-    $('.info .angle').text('Angle: ' + angle);
-
     // Set Angle
     $(line).css('transform', 'rotate(' + angle + 'deg)');
     $(a).css('transform', 'rotate(' + angle + 'deg)');

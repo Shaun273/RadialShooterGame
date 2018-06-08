@@ -1,0 +1,65 @@
+.body-div {
+
+  background: url(../images/backgrounds/zombieBG.png) no-repeat center;
+  background-size: cover;;
+}
+
+.body-div {
+  outline-color: black;
+}
+
+.dot {
+  background: url(../images/zombie.png) no-repeat center;
+  background-size: cover;
+  border: none;
+}
+.dead {
+  background: url(../images/bloodSplatter.png) no-repeat center;
+  background-size: cover;
+  border: none;
+}
+
+.a {
+  background: url(../images/SurvivorSprite.png) no-repeat center;
+  background-size: cover;
+  border: none;
+}
+
+.button {
+  background-color: limegreen;
+  color: black;
+}
+.navItem {
+  background-color: limegreen;
+  color: black;
+}
+
+.modal-header {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-footer {
+
+    background-color: #5cb85c;
+    color: white;
+}
+.slider {
+
+    background: #d3d3d3;
+
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    background: #4CAF50;
+    cursor: pointer;
+}
