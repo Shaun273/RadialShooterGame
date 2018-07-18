@@ -18,21 +18,18 @@ body  {
   outline: 200px solid red;
 }
 /* .body-div { */
-  width: 100%;
+  /* width: 100%;
   height: 100%;
   position: absolute;
 
   border: 5px black  solid ;
 
-  /* z-index: -1; */
-  /* outline:  */
-}
+  z-index: -1;
+  outline:
+} */
 
 /* Theme */
 
-.active {
-
-}
 
 #sound {
   display: none;

@@ -1,9 +1,10 @@
 .body-div {
   background: url(../images/backgrounds/ice.png) no-repeat center;
+
   background-size: cover;;
 }
 .outline {
-  outline-color: lightgray;
+  outline-color: #C5DECD;
 }
 
 .dot {
@@ -19,22 +20,22 @@
 }
 
 .button {
-  background-color: limegreen;
+  background-color: #A1E8CC;
   color: black;
 }
 .navItem {
-  background-color: limegreen;
+  background-color: #A1E8CC;
   color: black;
 }
 
 .modal-header {
-    background-color: #5cb85c;
+    background-color: #495159;
     color: white;
 }
 
 .modal-footer {
 
-    background-color: #5cb85c;
+    background-color: #495159;
     color: white;
 }
 .slider {
@@ -48,11 +49,11 @@
 }
 
 .slider::-webkit-slider-thumb {
-    background: #4CAF50;
+    background: #A1E8CC;
     cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    background: #4CAF50;
+    background: #A1E8CC;
     cursor: pointer;
 }

@@ -18,6 +18,7 @@ var colisionTestInterval = 1;
 var newLevel = true;
 var endless = true;
 var wave = 1;
+var gameRunning = false;
 var $a;
 var theme = "survivor";
 var highscores = [0,0,0,0,0,0,0,0,0,0];
@@ -39,17 +40,17 @@ $(document).ready(function(){
   //   this.style.top = parseInt(this.style.top)-100+"px";
   // })
 
-  var $a = $('.a');
+  $a = $('.a');
   youRadius = $a.width() / 2;
 
-
-  game()
+  //
+  // game()
   console.log("end of game function");
 
 });
 
 function game() {
-
+  gameRunning = true;
   // console.log("iterated");
   if (pause) {
 
@@ -59,8 +60,8 @@ function game() {
     createEnemies()
     $a = $('.a');
 
-    centerX = $a.offset().left + $a.width() / 2;
-    centerY = $a.offset().top + $a.height() / 2;
+    centerX = $a.offset().left + $a.width()/1.5;
+    centerY = $a.offset().top + $a.height()/1.5;
 
     // animate line?
     firing = !firing;
@@ -122,6 +123,6 @@ function game() {
 
 
     // reset?
-
   }
+  gameRunning = false;
 }
