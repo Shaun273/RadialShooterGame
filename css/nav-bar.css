@@ -25,6 +25,9 @@
 .waveScore {
   display: none;
 }
+#rulesBtn {
+  display: none;
+}
 
 .unmuted {
   content: url(../images/icons/1024px-Speaker_Icon.svg.png)

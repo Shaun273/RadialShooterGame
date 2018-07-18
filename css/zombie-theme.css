@@ -1,7 +1,7 @@
 .body-div {
 
-  background: url(../images/backgrounds/zombieBG.png) no-repeat center;
-
+  background: url(../images/backgrounds/zombieBG2.png) no-repeat;
+  background-position: center ;
   background-size: cover;;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .dot {
-  background: url(../images/zombie.png) no-repeat center;
+  background: url(../images/zombie.png) no-repeat;
   background-size: cover;
   border: none;
 }
@@ -22,32 +22,31 @@
 
 .a {
   background: url(../images/SurvivorSprite.png) no-repeat center;
-  background-size: cover;
+  background-size:cover;
   border: none;
 }
 
 .button {
-  background-color: limegreen;
-  color: black;
+  background-color: #362023;
+  color: white;
 }
 .navItem {
-  background-color: limegreen;
-  color: black;
+  background-color: #362023;
+  color: white;
 }
 
 .modal-header {
-    background-color: #5cb85c;
+    background-color: #838E83;
     color: white;
 }
 
 .modal-footer {
 
-    background-color: #5cb85c;
+    background-color: #838E83;
     color: white;
 }
 .slider {
-
-    background: #d3d3d3;
+    background: #aaa;
 
 }
 
@@ -56,11 +55,11 @@
 }
 
 .slider::-webkit-slider-thumb {
-    background: #4CAF50;
+    background: #362023;
     cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    background: #4CAF50;
+    background: #362023;
     cursor: pointer;
 }

@@ -1,5 +1,7 @@
 var enRadius = 40 / 2;
 var hit = false;
+var spawnRight = $(window).width();
+var spawnBottom = $(window).height();
 
 // Collisions
 function hittest(line,enemy){
@@ -91,18 +93,14 @@ function resolveHit(object) {
   if (endless == true){
     createSplat(object.style.left,object.style.top);
     if (Math.random()<0.5) {
-      object.style.left = Math.round(Math.random())*1000 + "px";
-      object.style.top = Math.round(Math.random()*700) + "px";
+      object.style.left = Math.round(Math.random())*spawnRight + "px";
+      object.style.top = Math.round(Math.random()*spawnBottom) + "px";
     } else {
-      object.style.left = Math.round(Math.random()*1000) + "px";
-      object.style.top = Math.round(Math.random())*700 + "px";
+      object.style.left = Math.round(Math.random()*spawnRight) + "px";
+      object.style.top = Math.round(Math.random())*spawnBottom + "px";
     }
   } else {
-    var splat = document.createElement('div');
-    splat.className = "dead";
-    splat.style.left = object.style.left;
-    splat.style.top = object.style.top;
-    document.body.appendChild(splat);
+    createSplat(object.style.left,object.style.top)
     object.remove();
   }
 }
@@ -151,8 +149,8 @@ function createEnemies(){
 
       dot = document.createElement('div');
       dot.className = "dot";
-      dot.style.left = Math.round(Math.random())*1000 + "px";
-      dot.style.top = Math.round(Math.random()*1000) + "px";
+      dot.style.left = Math.round(Math.random())*spawnRight + "px";
+      dot.style.top = Math.round(Math.random()*spawnBottom) + "px";
       document.body.appendChild(dot);
       // console.log("Created dot");
     }
@@ -164,12 +162,12 @@ function createEnemies(){
 function moveEnemies(){
 
   $('.dot').each(function(){
-    if (parseInt(this.style.left)<centerX- enRadius -youRadius) {
+    if (parseInt(this.style.left)<centerX -youRadius) {
       this.style.left = parseInt(this.style.left)+increment+"px";
     } else {
       this.style.left = parseInt(this.style.left)-increment+"px";
     }
-    if (parseInt(this.style.top)<centerY-enRadius - youRadius) {
+    if (parseInt(this.style.top)<centerY- youRadius) {
       this.style.top = parseInt(this.style.top)+increment+"px";
     } else {
       this.style.top = parseInt(this.style.top)-increment+"px";

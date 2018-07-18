@@ -1,10 +1,12 @@
 
 // Get the modal
 var menu = document.getElementById('menu');
+// var rules = document.getElementById('rules');
 var highScores = document.getElementById('highScores')
 
 // Get the button that opens the modal
 var menuBtn = document.getElementById("myBtn");
+// var rulesBtn = document.getElementById("rulesBtn");
 var highScoreBtn = document.getElementById("highScoresBtn");
 
 // Get the <span> element that closes the modal
@@ -18,6 +20,10 @@ menuBtn.onclick = function() {
     menu.style.display = "block";
     pause =true;
 }
+// rulesBtn.onclick = function() {
+//     rules.style.display = "block";
+//     pause =true;
+// }
 highScoreBtn.onclick = function() {
     highScores.style.display = "block";
     pause =true;
@@ -42,8 +48,8 @@ spanLose.onclick = function() {
 }
 spanRules.onclick = function() {
 
-    rules.style.display = "none";
-    pause =false;
+    // rules.style.display = "none";
+    // pause =false;
 }
 spanScores.onclick = function() {
 
@@ -63,7 +69,7 @@ window.onclick = function(event) {
 
 window.onclick = function(event) {
     if (event.target == highScores) {
-        menu.style.display = "none";
+        highScores.style.display = "none";
 
         pause = false;
     }
@@ -93,8 +99,9 @@ function tryAgain() {
   lost = false;
   loseScreen.style.display = "none";
   removeDots()
-  
-  game()
+  if (!gameRunning) {
+    game()
+  }
 }
 
 function removeDots() {
